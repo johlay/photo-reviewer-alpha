@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
+import PhotoAlbumsPage from "./pages/PhotoAlbumsPage";
 
 function App() {
   // set the background color for the whole application
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/photo-albums" element={<PhotoAlbumsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

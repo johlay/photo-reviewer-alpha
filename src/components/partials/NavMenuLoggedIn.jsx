@@ -23,8 +23,8 @@ const NavMenuLoggedIn = ({ currentUser, logout }) => {
         title={<FontAwesomeIcon icon={faUser} size="1x" color="white" />}
         id="nav-dropdown"
       >
-        <Link className="dropdown-item" to="/albums">
-          My albums
+        <Link className="dropdown-item" to="/photo-albums">
+          My photo albums
         </Link>
         <NavDropdown.Divider />
         <span
