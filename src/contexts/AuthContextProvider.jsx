@@ -1,11 +1,29 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/index";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    // firebase authentication's auth-state observer is listening for changes
+    onAuthStateChanged(auth, (user) => {
+      // update state variable for currentUser
+      setCurrentUser(user);
+    });
+  }, []);
+
+  // login user
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   // registration for new user
   const register = (email, password) => {
@@ -17,7 +35,12 @@ const AuthContextProvider = ({ children }) => {
     return updateProfile(auth.currentUser, { displayName: fullname });
   };
 
-  const contextValues = { currentUser, register, userDisplayNameRegistration };
+  const contextValues = {
+    currentUser,
+    login,
+    register,
+    userDisplayNameRegistration,
+  };
 
   return (
     <AuthContext.Provider value={contextValues}>
