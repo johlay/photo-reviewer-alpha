@@ -3,6 +3,9 @@ import Navigation from "./components/partials/Navigation";
 import HomePage from "./pages/HomePage";
 
 function App() {
+  // set the background color for the whole application
+  document.body.className = "bg-secondary";
+
   return (
     <BrowserRouter>
       <div className="App">
