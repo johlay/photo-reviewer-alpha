@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import AuthErrorBox from "../partials/AuthErrorBox";
 
 const RegistrationForm = () => {
   const fullnameRef = useRef("");
@@ -8,14 +9,34 @@ const RegistrationForm = () => {
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // set loading to true during validation process
+    setLoading(true);
+
+    // checks if password matches each other
+    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+      setError("Passwords doesn't match each other");
+
+      return setLoading(false);
+    }
+
+    // checks if password is at least six characters.
+    if (passwordRef.current.value.length < 6) {
+      setError("Password is too short. It needs to be at least six characters.");
+
+      return setLoading(false);
+    }
   };
 
   return (
     <div className="w-50 mx-auto">
       <h2 className="text-center text-light py-3">Registration</h2>
-
+      {error && <AuthErrorBox error={error} />}
       <Form onSubmit={handleSubmit}>
         <Form.Group id="full-name" className="mb-3">
           <Form.Label className="text-light">Full name</Form.Label>
@@ -40,7 +61,7 @@ const RegistrationForm = () => {
         <hr className="bg-light my-4" />
 
         <div className="d-grid gap-2">
-          <Button type="submit" variant="dark">
+          <Button disabled={loading} type="submit" variant="dark">
             Register now
           </Button>
         </div>
