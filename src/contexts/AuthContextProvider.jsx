@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -25,6 +26,11 @@ const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // logout user
+  const logout = () => {
+    return signOut(auth);
+  };
+
   // registration for new user
   const register = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -38,6 +44,7 @@ const AuthContextProvider = ({ children }) => {
   const contextValues = {
     currentUser,
     login,
+    logout,
     register,
     userDisplayNameRegistration,
   };

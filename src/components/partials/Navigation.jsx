@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavMenuLoggedIn from "./NavMenuLoggedIn";
 import NavMenuNotLoggedIn from "./NavMenuNotLoggedIn";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const Navigation = () => {
+  const { currentUser, logout } = useAuthContext();
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -15,7 +18,11 @@ const Navigation = () => {
         <Navbar.Toggle aria-controls="logged-in-navbar-nav" />
         <Navbar.Collapse id="logged-in-navbar-nav">
           <Nav className="ms-auto">
-            <NavMenuNotLoggedIn />
+            {!currentUser ? (
+              <NavMenuNotLoggedIn />
+            ) : (
+              <NavMenuLoggedIn currentUser={currentUser} logout={logout} />
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

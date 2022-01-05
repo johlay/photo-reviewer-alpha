@@ -8,7 +8,7 @@ const ConfirmAccountModal = ({ showModal }) => {
   return (
     <Modal
       size="lg"
-      aria-labelledby="confirm-user-modal"
+      aria-labelledby="confirm-account-modal"
       show={showModal}
       centered
     >
