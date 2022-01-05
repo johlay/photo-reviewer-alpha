@@ -15,11 +15,11 @@ const ConfirmAccountModal = ({ showModal }) => {
       <Modal.Body>
         <h3 className="text-center">Congratulations!</h3>
         <p className="text-center">
-          Your account has been successfully created. You can now login.
+          Your account has been successfully created.
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="dark" onClick={() => navigate("/login")}>
+        <Button variant="dark" onClick={() => navigate("/")}>
           Continue
         </Button>
       </Modal.Footer>

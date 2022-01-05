@@ -49,7 +49,7 @@ const RegistrationForm = () => {
             });
         } else {
           // if an unexpected error occured and no userCredential data was found, show error message
-          setError("Error! Please try again.");
+          setError("An error occured. Please try again.");
 
           return setLoading(false);
         }
