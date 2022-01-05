@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import useAuthContext from "../../hooks/useAuthContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AuthErrorBox from "../partials/AuthErrorBox";
@@ -12,25 +13,49 @@ const RegistrationForm = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const { register, userDisplayNameRegistration } = useAuthContext();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // set loading to true during validation process
     setLoading(true);
 
-    // checks if password matches each other
+    // check if passwords matches each other
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
       setError("Passwords doesn't match each other");
 
       return setLoading(false);
     }
 
-    // checks if password is at least six characters.
-    if (passwordRef.current.value.length < 6) {
-      setError("Password is too short. It needs to be at least six characters.");
+    register(emailRef.current.value.trim(), passwordRef.current.value.trim())
+      .then((userCredential) => {
+        // if registration was successful, make sure to register user's display name as well.
+        if (userCredential) {
+          userDisplayNameRegistration(fullnameRef.current.value)
+            .then(() => {
+              // user's display name is successfully updated
+            })
+            .catch((error) => {
+              // an error occured while trying to update profile's display name after registration
+              setError(error.message);
+            })
+            .finally(() => {
+              // set loading to false, despite the outcome.
+              return setLoading(false);
+            });
+        } else {
+          // if an unexpected error occured and no userCredential data was found, show error message
+          setError("Error! Please try again.");
 
-      return setLoading(false);
-    }
+          return setLoading(false);
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+
+        return setLoading(false);
+      });
   };
 
   return (

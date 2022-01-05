@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { auth } from "../firebase/index";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,12 @@ const AuthContextProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const contextValues = { currentUser, register };
+  // include user's fullname during registration for new user
+  const userDisplayNameRegistration = (fullname) => {
+    return updateProfile(auth.currentUser, { displayName: fullname });
+  };
+
+  const contextValues = { currentUser, register, userDisplayNameRegistration };
 
   return (
     <AuthContext.Provider value={contextValues}>
