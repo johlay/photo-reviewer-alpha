@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import useAuthContext from "../../hooks/useAuthContext";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import AuthErrorBox from "../partials/AuthErrorBox";
+import ConfirmAccountModal from "./ConfirmAccountModal";
 
 const RegistrationForm = () => {
   const fullnameRef = useRef("");
@@ -12,6 +13,7 @@ const RegistrationForm = () => {
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const { register, userDisplayNameRegistration } = useAuthContext();
 
@@ -32,9 +34,10 @@ const RegistrationForm = () => {
       .then((userCredential) => {
         // if registration was successful, make sure to register user's display name as well.
         if (userCredential) {
-          userDisplayNameRegistration(fullnameRef.current.value)
+          userDisplayNameRegistration(fullnameRef.current.value.trim())
             .then(() => {
-              // user's display name is successfully updated
+              // show modal which confirms successful registration
+              setShowModal(true);
             })
             .catch((error) => {
               // an error occured while trying to update profile's display name after registration
@@ -91,6 +94,8 @@ const RegistrationForm = () => {
           </Button>
         </div>
       </Form>
+
+      <ConfirmAccountModal showModal={showModal} />
     </div>
   );
 };
