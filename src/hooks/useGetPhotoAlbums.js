@@ -1,13 +1,16 @@
 import { useQuery } from "react-query";
 import { db } from "../firebase";
-import { collection, where, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, where, getDocs } from "firebase/firestore";
 
 const useGetPhotoAlbums = (userUid) => {
   // function that gets all documents from "photo albums" collection where the owner matches the user's uid in firebase firestore
   const getPhotoAlbums = async (uid) => {
     const snapshot = await getDocs(
-      collection(db, "albums"),
-      where("owner", "==", `${uid}`)
+      query(
+        collection(db, "albums"),
+        where("owner", "==", uid),
+        orderBy("created_at", "desc")
+      )
     );
 
     const response = snapshot.docs.map((doc) => {

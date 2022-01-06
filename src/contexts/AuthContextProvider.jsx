@@ -12,12 +12,16 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // firebase authentication's auth-state observer is listening for changes
     onAuthStateChanged(auth, (user) => {
       // update state variable for currentUser
       setCurrentUser(user);
+
+      // set loading to false after authenticating user is done
+      setLoading(false);
     });
   }, []);
 
@@ -51,7 +55,7 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={contextValues}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
