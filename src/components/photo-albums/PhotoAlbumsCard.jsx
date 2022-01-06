@@ -11,7 +11,7 @@ import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
 // implement additional dayjs form
 dayjs.extend(relativeTime);
 
-const PhotoAlbumCard = ({ album, refetch, user }) => {
+const PhotoAlbumsCard = ({ album, refetch, user }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -74,4 +74,4 @@ const PhotoAlbumCard = ({ album, refetch, user }) => {
   );
 };
 
-export default PhotoAlbumCard;
+export default PhotoAlbumsCard;

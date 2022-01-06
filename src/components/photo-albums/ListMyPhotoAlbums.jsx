@@ -1,5 +1,5 @@
 import CreatePhotoAlbum from "./CreatePhotoAlbum";
-import PhotoAlbumGrid from "./PhotoAlbumGrid";
+import PhotoAlbumsGrid from "./PhotoAlbumsGrid";
 import useAuthContext from "../../hooks/useAuthContext";
 import useGetPhotoAlbums from "../../hooks/useGetPhotoAlbums";
 
@@ -9,12 +9,12 @@ const ListMyPhotoAlbums = () => {
 
   return (
     <>
-      <h2 className="text-center text-light py-3 fw-bold">My Photo Albums</h2>{" "}
+      <h2 className="text-center text-light py-3 fw-bold">My Photo Albums</h2>
       <CreatePhotoAlbum
         refetch={myPhotoAlbums.refetch}
         userUid={currentUser?.uid}
       />
-      <PhotoAlbumGrid
+      <PhotoAlbumsGrid
         data={myPhotoAlbums?.data}
         refetch={myPhotoAlbums.refetch}
         user={currentUser}
