@@ -16,7 +16,7 @@ const EditPhotoAlbumTitleModal = ({
 
   const onSaveChanges = () => {
     photoAlbum.edit(photoAlbumTitleRef.current.value, album?.id).then(() => {
-      // refetch data for photo albums
+      // refetch data for photo albums after editing
       refetch();
 
       // close the modal if title editing was successful
@@ -26,7 +26,7 @@ const EditPhotoAlbumTitleModal = ({
 
   return (
     <Modal
-      size="lg"
+      size="md"
       aria-labelledby="confirm-account-modal"
       show={showModal}
       centered
@@ -37,7 +37,8 @@ const EditPhotoAlbumTitleModal = ({
         </p>
         <Form.Control
           ref={photoAlbumTitleRef}
-          className="w-75 mx-auto"
+          className="mx-auto"
+          style={{ width: "90%" }}
           type="text"
           placeholder="Enter a new title for you photo album"
         />
