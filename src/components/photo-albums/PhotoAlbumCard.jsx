@@ -5,12 +5,14 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Card from "react-bootstrap/Card";
+import DeletePhotoAlbumModal from "../modals/DeletePhotoAlbumModal";
 import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
 
 // implement additional dayjs form
 dayjs.extend(relativeTime);
 
 const PhotoAlbumCard = ({ album, refetch, user }) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
   return (
@@ -35,7 +37,11 @@ const PhotoAlbumCard = ({ album, refetch, user }) => {
               <FontAwesomeIcon icon={faEdit} size="2x" color="black" />
             </span>
 
-            <span aria-label="delete-icon" style={{ cursor: "pointer" }}>
+            <span
+              onClick={() => setShowDeleteModal(true)}
+              aria-label="delete-icon"
+              style={{ cursor: "pointer" }}
+            >
               <FontAwesomeIcon icon={faTrash} size="2x" color="black" />
             </span>
           </div>
@@ -50,6 +56,13 @@ const PhotoAlbumCard = ({ album, refetch, user }) => {
           </div>
         </Card.Body>
       </Card>
+
+      <DeletePhotoAlbumModal
+        album={album}
+        refetch={refetch}
+        showModal={showDeleteModal}
+        setShowModal={setShowDeleteModal}
+      />
 
       <EditPhotoAlbumTitleModal
         album={album}
