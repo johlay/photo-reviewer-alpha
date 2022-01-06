@@ -1,8 +1,10 @@
 import CreatePhotoAlbum from "./CreatePhotoAlbum";
 import useAuthContext from "../../hooks/useAuthContext";
+import useGetPhotoAlbums from "../../hooks/useGetPhotoAlbums";
 
 const ListMyPhotoAlbums = () => {
   const { currentUser } = useAuthContext();
+  const myPhotoAlbums = useGetPhotoAlbums(currentUser?.uid);
 
   return (
     <>
