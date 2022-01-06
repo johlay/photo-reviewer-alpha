@@ -15,8 +15,9 @@ const ListMyPhotoAlbums = () => {
         userUid={currentUser?.uid}
       />
       <PhotoAlbumGrid
-        addedBy={currentUser?.displayName}
         data={myPhotoAlbums?.data}
+        refetch={myPhotoAlbums.refetch}
+        user={currentUser}
       />
     </>
   );
