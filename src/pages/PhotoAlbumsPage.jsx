@@ -1,10 +1,10 @@
 import Container from "react-bootstrap/Container";
-import ListPhotoAlbums from "../components/photo-albums/ListPhotoAlbums";
+import ListMyPhotoAlbums from "../components/photo-albums/ListMyPhotoAlbums";
 
 const PhotoAlbumsPage = () => {
   return (
     <Container className="my-5">
-      <ListPhotoAlbums />
+      <ListMyPhotoAlbums />
     </Container>
   );
 };
