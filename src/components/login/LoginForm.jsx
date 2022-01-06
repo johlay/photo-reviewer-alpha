@@ -25,7 +25,7 @@ const LoginForm = () => {
       .then((userCredential) => {
         // re-directs user to route path: "/" if validation is successful
         if (userCredential) {
-          navigate("/");
+          navigate("/photo-albums");
         } else {
           // if an unexpected error occured and no userCredential data was found, show error message
           setError("An error occured. Please try again.");
