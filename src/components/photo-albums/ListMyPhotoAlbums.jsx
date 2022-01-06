@@ -10,7 +10,10 @@ const ListMyPhotoAlbums = () => {
   return (
     <>
       <h2 className="text-center text-light py-3 fw-bold">My Photo Albums</h2>{" "}
-      <CreatePhotoAlbum userUid={currentUser?.uid} />
+      <CreatePhotoAlbum
+        refetch={myPhotoAlbums.refetch}
+        userUid={currentUser?.uid}
+      />
       <PhotoAlbumGrid
         addedBy={currentUser?.displayName}
         data={myPhotoAlbums?.data}

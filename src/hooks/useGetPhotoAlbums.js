@@ -1,20 +1,13 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { db } from "../firebase";
 import { collection, where, getDocs } from "firebase/firestore";
 
-const useGetPhotoAlbums = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPhotoAlbums();
-  }, []);
-
-  // get all documents from "photo albums" collection where the owner matches the user's uid in firebase firestore
-  const getPhotoAlbums = async (userUid) => {
+const useGetPhotoAlbums = (userUid) => {
+  // function that gets all documents from "photo albums" collection where the owner matches the user's uid in firebase firestore
+  const getPhotoAlbums = async (uid) => {
     const snapshot = await getDocs(
       collection(db, "albums"),
-      where("owner", "==", `${userUid}`)
+      where("owner", "==", `${uid}`)
     );
 
     const response = snapshot.docs.map((doc) => {
@@ -24,11 +17,14 @@ const useGetPhotoAlbums = () => {
       };
     });
 
-    // store the new response data in the state variable: data  & set loading to
-    setData(response);
-    setLoading(false);
+    return response;
   };
-  return { data, loading, getPhotoAlbums };
+
+  const getNewPhotoAlbumsQuery = useQuery(["get-photo-albums"], () =>
+    getPhotoAlbums(userUid)
+  );
+
+  return getNewPhotoAlbumsQuery;
 };
 
 export default useGetPhotoAlbums;

@@ -4,17 +4,20 @@ import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 import useNewPhotoAlbum from "../../hooks/useNewPhotoAlbum";
 
-const CreatePhotoAlbum = ({ userUid }) => {
+const CreatePhotoAlbum = ({ userUid, refetch }) => {
   const albumTitleRef = useRef("");
 
   const photoAlbum = useNewPhotoAlbum();
 
   const handleClick = () => {
     // create the new "empty" album
-    photoAlbum.create(albumTitleRef.current.value, userUid);
+    photoAlbum.create(albumTitleRef.current.value, userUid).then(() => {
+      // refetch data for getting photo albums
+      refetch();
 
-    // reset input field
-    albumTitleRef.current.value = "";
+      // reset input field
+      albumTitleRef.current.value = "";
+    });
   };
 
   return (
