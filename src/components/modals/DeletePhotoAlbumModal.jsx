@@ -1,8 +1,12 @@
+import { useNavigate, useLocation } from "react-router-dom";
 import useDeletePhotoAlbum from "../../hooks/useDeletePhotoAlbum";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const photoAlbum = useDeletePhotoAlbum();
 
   const onDeletePhotoAlbum = () => {
@@ -10,8 +14,14 @@ const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
       // refetch data for photo albums after deletion
       refetch();
 
-      // close the modal if deletion was successful
-      setShowModal(false);
+      // check the pathname of location.
+      if (location.pathname !== "/photo-albums") {
+        // if user is for an example in route path: "/photo-albums/:albumId" --> re-directs user to page for showing all photo albums
+        navigate("/photo-albums");
+      } else {
+        // close the modal if deletion was successful
+        setShowModal(false);
+      }
     });
   };
 
