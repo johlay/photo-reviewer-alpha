@@ -16,7 +16,7 @@ const EditPhotoAlbumTitleModal = ({
 
   const onSaveChanges = () => {
     photoAlbum.edit(photoAlbumTitleRef.current.value, album?.id).then(() => {
-      // refetch data for photo albums after editing
+      // refetch data for photo album(s) after editing
       refetch();
 
       // close the modal if title editing was successful

@@ -15,25 +15,25 @@ const PhotoAlbumHeader = ({ albumId }) => {
   const photoAlbum = useGetPhotoAlbum(albumId);
 
   return (
-    <>
-      <Row>
-        <Col>
-          <h2 className="fw-bold text-light">{photoAlbum?.data?.name}</h2>
+    <Row>
+      <Col>
+        <h2 className="fw-bold text-light">{photoAlbum?.data?.name}</h2>
 
-          <p className="text-light mb-0">
-            Album created:{" "}
-            {dayjs(photoAlbum?.data?.created_at?.seconds * 1000).fromNow()}
-          </p>
-          <p className="text-light mb-0">
-            <span className="fw-bold">Added by:</span>{" "}
-            {currentUser?.displayName}
-          </p>
-        </Col>
-        <Col className="d-flex justify-content-end">
-          <PhotoAlbumHeaderOptions />
-        </Col>
-      </Row>
-    </>
+        <p className="text-light mb-0">
+          Album created:{" "}
+          {dayjs(photoAlbum?.data?.created_at?.seconds * 1000).fromNow()}
+        </p>
+        <p className="text-light mb-0">
+          <span className="fw-bold">Added by:</span> {currentUser?.displayName}
+        </p>
+      </Col>
+      <Col className="d-flex justify-content-end">
+        <PhotoAlbumHeaderOptions
+          album={photoAlbum?.data}
+          refetch={photoAlbum?.refetch}
+        />
+      </Col>
+    </Row>
   );
 };
 

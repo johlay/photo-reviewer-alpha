@@ -8,7 +8,10 @@ const useGetPhotoAlbum = (albumId) => {
     const documentSnapshot = await getDoc(doc(db, "albums", id));
 
     if (documentSnapshot.exists()) {
-      return documentSnapshot.data();
+      return {
+        id: albumId,
+        ...documentSnapshot.data(),
+      };
     } else {
       return null;
     }
