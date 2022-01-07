@@ -3,12 +3,15 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faShare } from "@fortawesome/free-solid-svg-icons";
+import CreateReviewLinkModal from "../modals/CreateReviewLinkModal";
 import DeletePhotoAlbumModal from "../modals/DeletePhotoAlbumModal";
 import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
 
 const PhotoAlbumHeaderOptions = ({ album, refetch }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showCreateReviewLinkModal, setShowCreateReviewLinkModal] =
+    useState(false);
 
   return (
     <div>
@@ -27,13 +30,22 @@ const PhotoAlbumHeaderOptions = ({ album, refetch }) => {
           </span>
         </Button>
 
-        <Button variant="dark">
+        <Button
+          onClick={() => setShowCreateReviewLinkModal(true)}
+          variant="dark"
+        >
           Create review link
           <span className="ms-3" arial-label="icon-create-review-link">
             <FontAwesomeIcon icon={faShare} size="1x" color="white" />
           </span>
         </Button>
       </ButtonGroup>
+
+      <CreateReviewLinkModal
+        album={album}
+        showModal={showCreateReviewLinkModal}
+        setShowModal={setShowCreateReviewLinkModal}
+      />
 
       <DeletePhotoAlbumModal
         album={album}
