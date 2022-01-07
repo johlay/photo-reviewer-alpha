@@ -23,8 +23,10 @@ const useGetPhotoAlbums = (userUid) => {
     return response;
   };
 
-  const getNewPhotoAlbumsQuery = useQuery(["get-photo-albums"], () =>
-    getPhotoAlbums(userUid)
+  const getNewPhotoAlbumsQuery = useQuery(
+    ["get-photo-albums"],
+    () => getPhotoAlbums(userUid),
+    { keepPreviousData: true }
   );
 
   return getNewPhotoAlbumsQuery;
