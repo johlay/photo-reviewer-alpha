@@ -23,7 +23,7 @@ const useUploadImage = (setFiles) => {
     // gets the image's file extension
     const ext = image.name.substring(image.name.lastIndexOf(".") + 1);
 
-    // create reference for the file that is going the uploaded to firebase storage
+    // create reference for the file that is going to be uploaded to firebase storage
     const storageRef = ref(storage, `images/${uuid}.${ext}`);
 
     // upload the image and its metadata

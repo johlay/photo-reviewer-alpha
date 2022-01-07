@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import useNewPhotoAlbum from "../../hooks/useNewPhotoAlbum";
+import usePhotoAlbum from "../../hooks/usePhotoAlbum";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -7,7 +7,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 const CreatePhotoAlbum = ({ userUid, refetch }) => {
   const albumTitleRef = useRef("");
 
-  const photoAlbum = useNewPhotoAlbum();
+  const photoAlbum = usePhotoAlbum();
 
   const handleClick = () => {
     // create the new "empty" album
