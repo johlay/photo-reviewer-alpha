@@ -24,7 +24,7 @@ const PhotoAlbumHeaderOptions = ({ album, refetch }) => {
         </Button>
 
         <Button onClick={() => setShowDeleteModal(true)} variant="dark">
-          Delete Album
+          Delete album
           <span className="ms-3" arial-label="icon-delete-photo-album">
             <FontAwesomeIcon icon={faTrash} size="1x" color="white" />
           </span>
