@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import Navigation from "./components/partials/Navigation";
+import CustomerReviewPage from "./pages/CustomerReviewPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -23,6 +24,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/photo-albums" element={<PhotoAlbumsPage />} />
             <Route path="/photo-albums/:albumId" element={<PhotoAlbumPage />} />
+            <Route path="/review/:albumId" element={<CustomerReviewPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
