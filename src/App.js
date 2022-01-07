@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import Navigation from "./components/partials/Navigation";
+import RequireAuth from "./components/routeguard/RequireAuth";
 import CustomerReviewPage from "./pages/CustomerReviewPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -22,8 +23,25 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/photo-albums" element={<PhotoAlbumsPage />} />
-            <Route path="/photo-albums/:albumId" element={<PhotoAlbumPage />} />
+
+            <Route
+              path="/photo-albums"
+              element={
+                <RequireAuth>
+                  <PhotoAlbumsPage />{" "}
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path="/photo-albums/:albumId"
+              element={
+                <RequireAuth>
+                  <PhotoAlbumPage />
+                </RequireAuth>
+              }
+            />
+
             <Route path="/review/:albumId" element={<CustomerReviewPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
