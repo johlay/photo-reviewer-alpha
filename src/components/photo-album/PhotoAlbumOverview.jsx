@@ -1,28 +1,29 @@
-import { useNavigate, useParams } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
+import useAuthContext from "../../hooks/useAuthContext";
+import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
+import GoBackButton from "./GoBackButton";
+import RequireAuthMessage from "../routeguard/RequireAuthMessage";
 import PhotoAlbumHeader from "./PhotoAlbumHeader";
 
 const PhotoAlbumOverview = () => {
+  const { currentUser } = useAuthContext();
   const { albumId } = useParams();
+  const photoAlbum = useGetPhotoAlbum(albumId);
 
-  const navigate = useNavigate();
+  // check if current user is the creator/owner of this album
+  if (
+    currentUser &&
+    photoAlbum.data &&
+    currentUser.uid !== photoAlbum.data.owner
+  ) {
+    // if authentication was unsuccessful then return the RequireAuthMessage component instead.
+    return <RequireAuthMessage />;
+  }
 
   return (
     <>
-      <Button
-        onClick={() => navigate("/photo-albums")}
-        className="mb-5"
-        variant="dark"
-      >
-        <span aria-label="an arrow left icon" className="me-1">
-          <FontAwesomeIcon icon={faArrowCircleLeft} size="1x" color="white" />
-        </span>{" "}
-        Go back
-      </Button>
-
-      <PhotoAlbumHeader albumId={albumId} />
+      <GoBackButton />
+      <PhotoAlbumHeader currentUser={currentUser} photoAlbum={photoAlbum} />
 
       <hr className="bg-light my-5" />
     </>

@@ -1,5 +1,3 @@
-import useAuthContext from "../../hooks/useAuthContext";
-import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Col from "react-bootstrap/Col";
@@ -9,11 +7,7 @@ import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
 // implement additional dayjs form
 dayjs.extend(relativeTime);
 
-const PhotoAlbumHeader = ({ albumId }) => {
-  const { currentUser } = useAuthContext();
-
-  const photoAlbum = useGetPhotoAlbum(albumId);
-
+const PhotoAlbumHeader = ({ currentUser, photoAlbum }) => {
   return (
     <Row>
       <Col>
