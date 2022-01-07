@@ -1,10 +1,10 @@
-import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
 import useAuthContext from "../../hooks/useAuthContext";
-import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
+import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
 
 // implement additional dayjs form
 dayjs.extend(relativeTime);

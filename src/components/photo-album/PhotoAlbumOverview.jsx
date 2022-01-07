@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import Button from "react-bootstrap/Button";
 import PhotoAlbumHeader from "./PhotoAlbumHeader";
 
 const PhotoAlbumOverview = () => {

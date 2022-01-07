@@ -1,7 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faShare } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faShare } from "@fortawesome/free-solid-svg-icons";
 
 const PhotoAlbumHeaderOptions = () => {
   return (

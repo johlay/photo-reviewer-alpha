@@ -1,6 +1,6 @@
+import useDeletePhotoAlbum from "../../hooks/useDeletePhotoAlbum";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import useDeletePhotoAlbum from "../../hooks/useDeletePhotoAlbum";
 
 const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
   const photoAlbum = useDeletePhotoAlbum();

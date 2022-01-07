@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import useAuthContext from "../../hooks/useAuthContext";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import AuthErrorBox from "../partials/AuthErrorBox";
+import Button from "react-bootstrap/Button";
 import ConfirmAccountModal from "./ConfirmAccountModal";
+import Form from "react-bootstrap/Form";
 
 const RegistrationForm = () => {
   const fullnameRef = useRef("");

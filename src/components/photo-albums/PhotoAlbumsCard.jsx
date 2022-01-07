@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import Card from "react-bootstrap/Card";
 import DeletePhotoAlbumModal from "../modals/DeletePhotoAlbumModal";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
 
 // implement additional dayjs form

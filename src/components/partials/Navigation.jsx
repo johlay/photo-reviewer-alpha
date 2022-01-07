@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
+import useAuthContext from "../../hooks/useAuthContext";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavMenuLoggedIn from "./NavMenuLoggedIn";
 import NavMenuNotLoggedIn from "./NavMenuNotLoggedIn";
-import useAuthContext from "../../hooks/useAuthContext";
 
 const Navigation = () => {
   const { currentUser, logout } = useAuthContext();

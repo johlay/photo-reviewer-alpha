@@ -1,8 +1,8 @@
 import { useRef } from "react";
+import useEditPhotoAlbumTitle from "../../hooks/useEditPhotoAlbumTitle";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import useEditPhotoAlbumTitle from "../../hooks/useEditPhotoAlbumTitle";
 
 const EditPhotoAlbumTitleModal = ({
   album,
