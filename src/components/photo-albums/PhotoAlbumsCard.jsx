@@ -18,7 +18,7 @@ const PhotoAlbumsCard = ({ album, refetch, user }) => {
   return (
     <>
       <Card className="my-4">
-        <div className="bg-dark" style={{ height: "180px" }}></div>
+        <div className="bg-dark rounded" style={{ height: "180px" }}></div>
 
         <Card.Body>
           <Card.Title>{album?.name}</Card.Title>
