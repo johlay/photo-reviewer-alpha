@@ -28,7 +28,7 @@ const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
   return (
     <Modal
       size="md"
-      aria-labelledby="confirm-account-modal"
+      aria-labelledby="delete-photo-album-modal"
       show={showModal}
       centered
     >

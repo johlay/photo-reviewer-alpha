@@ -5,7 +5,7 @@ const CreateReviewLinkModal = ({ album, showModal, setShowModal }) => {
   return (
     <Modal
       size="md"
-      aria-labelledby="confirm-account-modal"
+      aria-labelledby="create-review-link-modal"
       show={showModal}
       centered
     >

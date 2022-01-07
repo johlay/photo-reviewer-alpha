@@ -27,7 +27,7 @@ const EditPhotoAlbumTitleModal = ({
   return (
     <Modal
       size="md"
-      aria-labelledby="confirm-account-modal"
+      aria-labelledby="edit-photo-album-title-modal"
       show={showModal}
       centered
     >
