@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CustomerReviewPhotoGrid from "./CustomerReviewPhotoGrid";
 import CustomerReviewSummary from "./CustomerReviewSummary";
 
 const CustomerReviewPhotoAlbum = ({ photos, photoAlbum }) => {
@@ -19,6 +20,7 @@ const CustomerReviewPhotoAlbum = ({ photos, photoAlbum }) => {
         {photoAlbum?.data?.name}
       </h3>
       <CustomerReviewSummary />
+      <CustomerReviewPhotoGrid photos={reviewedPhotos} />
     </>
   );
 };

@@ -1,3 +1,4 @@
+import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,6 +26,10 @@ const CustomerReviewSummary = () => {
           color="red"
         />
       </p>
+
+      <div className="d-flex justify-content-center my-4">
+        <Button variant="dark">Submit review</Button>
+      </div>
     </>
   );
 };
