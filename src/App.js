@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import Navigation from "./components/partials/Navigation";
 import RequireAuth from "./components/routeguard/RequireAuth";
+import CustomerReviewFeedbackPage from "./pages/CustomerReviewFeedbackPage";
 import CustomerReviewPage from "./pages/CustomerReviewPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
@@ -43,6 +44,12 @@ function App() {
             />
 
             <Route path="/review/:albumId" element={<CustomerReviewPage />} />
+
+            <Route
+              path="/review/feedback"
+              element={<CustomerReviewFeedbackPage />}
+            />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
