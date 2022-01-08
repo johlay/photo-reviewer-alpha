@@ -33,7 +33,7 @@ const PhotoDropzone = ({ refetchPhotos }) => {
     onDrop,
   });
 
-  // render file that was selected using the photo dropzone
+  // render files that was selected using the photo dropzone
   const renderFiles = !files?.length ? (
     <li>None selected</li>
   ) : (
@@ -59,12 +59,13 @@ const PhotoDropzone = ({ refetchPhotos }) => {
         <input {...getInputProps()} />
 
         <p className="text-light text-center mb-0">
-          Drag and drop photo here or click to select photo <br />
+          Drag and drop photos here or click to select photos <br />
           <em>Accepted files: .jpg, .jpeg, .png, .webp </em> <br />
+          <em>Maximum files per upload: 5</em>
         </p>
         <hr className="bg-light w-75 mx-auto" />
         <div id="dropzone-selected-files" className="text-white text-center">
-          <p className="mb-0">Selected photo:</p>
+          <p className="mb-0">Selected photos:</p>
           <ul className="list-unstyled">{renderFiles}</ul>
         </div>
       </div>
