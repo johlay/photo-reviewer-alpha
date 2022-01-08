@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const CustomerReviewPhotoCard = ({ photo }) => {
+const CustomerReviewPhotoCard = ({ onReviewPhoto, photo }) => {
   return (
     <Card className="my-4">
       <Card.Img
@@ -13,6 +13,7 @@ const CustomerReviewPhotoCard = ({ photo }) => {
       <Card.Body className="bg-dark">
         <div className="d-flex justify-content-between">
           <FontAwesomeIcon
+            onClick={() => onReviewPhoto({ type: "keep" }, photo)}
             className="mx-4"
             style={{ cursor: "pointer" }}
             icon={faThumbsUp}
@@ -21,6 +22,7 @@ const CustomerReviewPhotoCard = ({ photo }) => {
           />
           <FontAwesomeIcon
             className="mx-4"
+            onClick={() => onReviewPhoto({ type: "discard" }, photo)}
             style={{ cursor: "pointer" }}
             icon={faThumbsDown}
             size="1x"

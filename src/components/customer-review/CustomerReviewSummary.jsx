@@ -2,13 +2,42 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
-const CustomerReviewSummary = () => {
+const CustomerReviewSummary = ({ reviewedPhotos }) => {
+  // check how many photos have been reviewed by customer
+  const customerReviewedPhotos = reviewedPhotos?.filter(
+    (photo) => photo?.selected === true
+  ).length;
+  const totalPhotos = reviewedPhotos?.length;
+
+  // photos to be discarded
+  const reviewedPhotosDiscard = reviewedPhotos?.filter(
+    (photo) => photo?.discard === true
+  ).length;
+
+  // photos to be kept
+  const reviewedPhotosKeep = reviewedPhotos?.filter(
+    (photo) => photo?.keep === true
+  );
+
+  // validation - check if every photos has been reviewed
+  const validateReviewedPhotos = reviewedPhotos?.every((photo) => {
+    return photo?.selected === true;
+  });
+
+  const handleSubmitReview = () => {
+    alert("you have reviewed all photos!");
+  };
+
   return (
     <>
-      <p className="text-center text-light">You have reviewed 0 / 12 photos</p>
+      <p className="text-center text-light">
+        You have reviewed{" "}
+        <span aria-label="reviewed-photos">{customerReviewedPhotos}</span> /{" "}
+        <span aria-label="total-photos">{totalPhotos}</span> photos
+      </p>
       <p className="text-center text-light">
         <span className="pe-3" aria-label="counter-keep">
-          0
+          {reviewedPhotosKeep.length}
         </span>
         <FontAwesomeIcon
           className="me-5"
@@ -17,7 +46,7 @@ const CustomerReviewSummary = () => {
           color="green"
         />
         <span className="ps-5" aria-label="counter-discard">
-          0
+          {reviewedPhotosDiscard}
         </span>
         <FontAwesomeIcon
           className="ms-3"
@@ -28,7 +57,13 @@ const CustomerReviewSummary = () => {
       </p>
 
       <div className="d-flex justify-content-center my-4">
-        <Button variant="dark">Submit review</Button>
+        <Button
+          onClick={handleSubmitReview}
+          disabled={!validateReviewedPhotos}
+          variant="dark"
+        >
+          Submit review
+        </Button>
       </div>
     </>
   );
