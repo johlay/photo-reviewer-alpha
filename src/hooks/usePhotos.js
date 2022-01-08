@@ -1,33 +1,17 @@
-import { db } from "../firebase";
-import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { useQuery } from "react-query";
+import { db, storage } from "../firebase";
+import { doc, deleteDoc } from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
 
-const usePhotos = (albumId) => {
-  // function that gets all the documents from "photos" collection where the owner matches user's uid in firebase firestore database
-  const getPhotos = async (uid) => {
-    const snapshot = await getDocs(
-      query(
-        collection(db, "photos"),
-        where("album_id", "==", uid),
-        orderBy("uploaded_at", "desc")
-      )
-    );
+const usePhotos = () => {
+  const deletePhoto = async (photo) => {
+    // delete photo from firebase storage
+    await deleteObject(ref(storage, photo?.fullpath));
 
-    const response = snapshot.docs.map((doc) => {
-      return {
-        id: doc.id,
-        ...doc.data(),
-      };
-    });
-
-    return response;
+    // delete photo document from firebase firestore database
+    await deleteDoc(doc(db, "photos", photo.id));
   };
 
-  const photosQuery = useQuery(["get-photos", albumId], () =>
-    getPhotos(albumId)
-  );
-
-  return photosQuery;
+  return { deletePhoto };
 };
 
 export default usePhotos;
