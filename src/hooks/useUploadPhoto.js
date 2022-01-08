@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { db, storage } from "../firebase";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import useAuthContext from "./useAuthContext";
 
-const useUploadPhoto = (setFiles) => {
+const useUploadPhoto = () => {
   const [error, setError] = useState(false);
   const [isMutating, setIsMutating] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(null);
 
-  const uploadPhoto = (albumId, photo) => {
+  const { currentUser } = useAuthContext();
+
+  const uploadPhoto = (albumId, photo, refetchPhotos, setFile) => {
     // reset to default state
     setError(false);
     setUploadProgress(null);
@@ -25,9 +28,10 @@ const useUploadPhoto = (setFiles) => {
     const ext = photo.name.substring(photo.name.lastIndexOf(".") + 1);
 
     // construct a reference for the file/photo that is going to be uploaded to firebase storage
-    const storageRef = ref(storage, `photos/${uuid}.${ext}`);
-
-    console.log({ storageRef });
+    const storageRef = ref(
+      storage,
+      `photos/${currentUser?.uid}/${uuid}.${ext}`
+    );
 
     // upload the image and its metadata
     const uploadTask = uploadBytesResumable(storageRef, photo);
@@ -44,7 +48,7 @@ const useUploadPhoto = (setFiles) => {
         setUploadProgress(progress);
       },
       (error) => {
-        setFiles(null);
+        setFile(null);
         setIsMutating(false);
         setError("Image uploading failed due to error: ", error.message);
         return;
@@ -61,13 +65,17 @@ const useUploadPhoto = (setFiles) => {
           type: photo.type,
           ext,
           photo_url: url,
+          uploaded_at: serverTimestamp(),
           album_id: albumId,
           uuid,
         });
 
-        setFiles(null);
+        setFile(null);
         setIsMutating(false);
         setUploadProgress(null);
+
+        // if uploading process was successful, refetch photos
+        refetchPhotos();
       }
     );
   };

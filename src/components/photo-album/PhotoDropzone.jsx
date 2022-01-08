@@ -4,9 +4,9 @@ import { useDropzone } from "react-dropzone";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
 import UploadProgressBar from "./UploadProgresBar";
 
-const PhotoDropzone = () => {
+const PhotoDropzone = ({ refetchPhotos }) => {
   const [file, setFile] = useState();
-  const photo = useUploadPhoto(setFile);
+  const photo = useUploadPhoto();
 
   const { albumId } = useParams();
 
@@ -16,7 +16,7 @@ const PhotoDropzone = () => {
     // store the file that was selected inside state variable: file
     setFile(acceptedFiles);
 
-    photo.uploadPhoto(albumId, acceptedFiles[0]);
+    photo.uploadPhoto(albumId, acceptedFiles[0], refetchPhotos, setFile);
   });
 
   const {

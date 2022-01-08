@@ -1,6 +1,6 @@
-import { useQuery } from "react-query";
 import { db } from "../firebase";
-import { collection, query, orderBy, where, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { useQuery } from "react-query";
 
 const useGetPhotoAlbums = (userUid) => {
   // function that gets all documents from "photo albums" collection where the owner matches the user's uid in firebase firestore
