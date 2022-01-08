@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
-import UploadProgressBar from "./UploadProgresBar";
+import UploadProgressBar from "./UploadProgressBar";
 
 const PhotoDropzone = ({ refetchPhotos }) => {
   const [files, setFiles] = useState();

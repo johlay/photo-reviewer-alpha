@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
@@ -7,8 +8,11 @@ import PhotoAlbumHeader from "./PhotoAlbumHeader";
 import PhotoDropzone from "./PhotoDropzone";
 import PhotoGrid from "./PhotoGrid";
 import RequireAuthMessage from "../routeguard/RequireAuthMessage";
+import SelectionAndCreationSummary from "./SelectionAndCreationSummary";
 
 const PhotoAlbumOverview = () => {
+  const [selectedPhotos, setSelectedPhotos] = useState([]);
+
   const { currentUser } = useAuthContext();
   const { albumId } = useParams();
   const photoAlbum = useGetPhotoAlbum(albumId);
@@ -24,6 +28,24 @@ const PhotoAlbumOverview = () => {
     return <RequireAuthMessage />;
   }
 
+  const onSelectedPhoto = (selected, photo) => {
+    // check if user selected the photo, if true - add it to the array/state variable --> "selectedPhotos"
+    if (selected === true) {
+      setSelectedPhotos((prev) => {
+        return [...prev, photo];
+      });
+      return;
+    }
+
+    if (selected === false) {
+      // create an updated list, removing the photo if it existed in the list before.
+      let updatedList = selectedPhotos.filter((item) => item?.id !== photo?.id);
+
+      setSelectedPhotos(updatedList);
+      return;
+    }
+  };
+
   return (
     <>
       <GoBackButton />
@@ -31,7 +53,12 @@ const PhotoAlbumOverview = () => {
 
       <hr className="bg-light my-5" />
       <PhotoDropzone refetchPhotos={photos?.refetch} />
-      <PhotoGrid refetchPhotos={photos?.refetch} photos={photos} />
+      <SelectionAndCreationSummary selectedPhotos={selectedPhotos} />
+      <PhotoGrid
+        onSelectedPhoto={onSelectedPhoto}
+        refetchPhotos={photos?.refetch}
+        photos={photos}
+      />
     </>
   );
 };

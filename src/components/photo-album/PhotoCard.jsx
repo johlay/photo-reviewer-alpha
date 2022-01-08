@@ -1,8 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 import usePhotos from "../../hooks/usePhotos";
 
-const PhotoCard = ({ photo, refetchPhotos }) => {
+const PhotoCard = ({ onSelectedPhoto, photo, refetchPhotos }) => {
   const { deletePhoto } = usePhotos();
 
   const onDeletePhoto = () => {
@@ -11,9 +12,13 @@ const PhotoCard = ({ photo, refetchPhotos }) => {
       refetchPhotos();
     });
   };
-
   return (
     <Card className="my-4">
+      <Form.Check
+        onClick={(e) => onSelectedPhoto(e.target.checked, photo)}
+        className="mb-0 position-absolute top-0 end-0 me-2 mt-1"
+        style={{ transform: "scale(2.3)" }}
+      />
       <Card.Img
         variant="top"
         src={photo?.photo_url}
