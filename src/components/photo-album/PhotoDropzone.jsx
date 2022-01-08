@@ -5,18 +5,19 @@ import useUploadPhoto from "../../hooks/useUploadPhoto";
 import UploadProgressBar from "./UploadProgresBar";
 
 const PhotoDropzone = ({ refetchPhotos }) => {
-  const [file, setFile] = useState();
+  const [files, setFiles] = useState();
   const photo = useUploadPhoto();
 
   const { albumId } = useParams();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length === 0) return;
 
     // store the file that was selected inside state variable: file
-    setFile(acceptedFiles);
+    setFiles(acceptedFiles);
 
-    photo.uploadPhoto(albumId, acceptedFiles[0], refetchPhotos, setFile);
+    photo.uploadPhoto(albumId, acceptedFiles, refetchPhotos, setFiles);
   });
 
   const {
@@ -27,16 +28,16 @@ const PhotoDropzone = ({ refetchPhotos }) => {
     isDragReject,
   } = useDropzone({
     accept: "image/jpg, image/jpeg, image/png, image/webp",
-    maxFiles: 1,
+    maxFiles: 5,
     disabled: photo?.isMutating,
     onDrop,
   });
 
   // render file that was selected using the photo dropzone
-  const renderFile = !file?.length ? (
+  const renderFiles = !files?.length ? (
     <li>None selected</li>
   ) : (
-    file?.map((image, index) => <li key={index}>{image.name}</li>)
+    files?.map((image, index) => <li key={index}>{image.name}</li>)
   );
 
   return (
@@ -64,7 +65,7 @@ const PhotoDropzone = ({ refetchPhotos }) => {
         <hr className="bg-light w-75 mx-auto" />
         <div id="dropzone-selected-files" className="text-white text-center">
           <p className="mb-0">Selected photo:</p>
-          <ul className="list-unstyled">{renderFile}</ul>
+          <ul className="list-unstyled">{renderFiles}</ul>
         </div>
       </div>
 
