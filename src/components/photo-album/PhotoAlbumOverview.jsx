@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useAuthContext from "../../hooks/useAuthContext";
 import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
-import usePhotos from "../../hooks/usePhotos";
+import useGetPhotos from "../../hooks/useGetPhotos";
 import GoBackButton from "./GoBackButton";
 import PhotoAlbumHeader from "./PhotoAlbumHeader";
 import PhotoDropzone from "./PhotoDropzone";
@@ -12,7 +12,7 @@ const PhotoAlbumOverview = () => {
   const { currentUser } = useAuthContext();
   const { albumId } = useParams();
   const photoAlbum = useGetPhotoAlbum(albumId);
-  const photos = usePhotos(albumId);
+  const photos = useGetPhotos(albumId);
 
   // check if current user is the creator/owner of this album
   if (
@@ -31,7 +31,7 @@ const PhotoAlbumOverview = () => {
 
       <hr className="bg-light my-5" />
       <PhotoDropzone refetchPhotos={photos?.refetch} />
-      <PhotoGrid photos={photos} />
+      <PhotoGrid refetchPhotos={photos?.refetch} photos={photos} />
     </>
   );
 };
