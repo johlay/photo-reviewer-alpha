@@ -1,19 +1,22 @@
 import { useCallback, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
-import useUploadPhoto from "../../hooks/useUploadImage";
+import useUploadPhoto from "../../hooks/useUploadPhoto";
 import UploadProgressBar from "./UploadProgresBar";
 
-const ImageDropzone = () => {
+const PhotoDropzone = () => {
   const [file, setFile] = useState();
   const photo = useUploadPhoto(setFile);
+
+  const { albumId } = useParams();
 
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length === 0) return;
 
-    // store the file that was selected inside state variable: files
+    // store the file that was selected inside state variable: file
     setFile(acceptedFiles);
 
-    photo.uploadImage(acceptedFiles[0]);
+    photo.uploadPhoto(albumId, acceptedFiles[0]);
   });
 
   const {
@@ -29,7 +32,7 @@ const ImageDropzone = () => {
     onDrop,
   });
 
-  // render file that was selected using the image dropzone
+  // render file that was selected using the photo dropzone
   const renderFile = !file?.length ? (
     <li>None selected</li>
   ) : (
@@ -75,4 +78,4 @@ const ImageDropzone = () => {
   );
 };
 
-export default ImageDropzone;
+export default PhotoDropzone;
