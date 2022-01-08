@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState } from "react";
 import usePhotoAlbum from "../../hooks/usePhotoAlbum";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,12 +10,12 @@ const EditPhotoAlbumTitleModal = ({
   showModal,
   setShowModal,
 }) => {
-  const photoAlbumTitleRef = useRef("");
+  const [photoAlbumTitle, setPhotoAlbumTitle] = useState("");
 
   const photoAlbum = usePhotoAlbum();
 
   const onSaveChanges = () => {
-    photoAlbum.edit(photoAlbumTitleRef.current.value, album?.id).then(() => {
+    photoAlbum.edit(photoAlbumTitle, album?.id).then(() => {
       // refetch data for photo album(s) after editing
       refetch();
 
@@ -36,7 +36,8 @@ const EditPhotoAlbumTitleModal = ({
           Edit title for photo album: <span className="h3">{album?.name}</span>
         </p>
         <Form.Control
-          ref={photoAlbumTitleRef}
+          onChange={(e) => setPhotoAlbumTitle(e.target.value)}
+          value={photoAlbumTitle}
           className="mx-auto"
           style={{ width: "90%" }}
           type="text"
@@ -44,10 +45,13 @@ const EditPhotoAlbumTitleModal = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={() => setShowModal(false)}>
+        <Button variant="danger" onClick={() => {
+          setPhotoAlbumTitle("")
+          setShowModal(false);
+        }}>
           Cancel
         </Button>
-        <Button variant="dark" onClick={onSaveChanges}>
+        <Button disabled={photoAlbumTitle.length < 1} variant="dark" onClick={onSaveChanges}>
           Save changes
         </Button>
       </Modal.Footer>
