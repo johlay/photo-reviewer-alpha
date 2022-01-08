@@ -43,7 +43,7 @@ const CustomerReviewSummary = ({ reviewedPhotos }) => {
       </p>
       <p className="text-center text-light">
         <span className="pe-3" aria-label="counter-keep">
-          {reviewedPhotosKeep.length}
+          {reviewedPhotosKeep?.length}
         </span>
         <FontAwesomeIcon
           className="me-5"

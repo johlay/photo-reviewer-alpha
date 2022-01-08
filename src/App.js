@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import RegisterPage from "./pages/RegisterPage";
 import PhotoAlbumPage from "./pages/PhotoAlbumPage";
 import PhotoAlbumsPage from "./pages/PhotoAlbumsPage";
+import SimpleReactLightbox from "simple-react-lightbox";
 
 function App() {
   // set the background color for the whole application
@@ -18,41 +19,43 @@ function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
-        <div className="App">
-          <Navigation />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+        <SimpleReactLightbox>
+          <div className="App">
+            <Navigation />
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
 
-            <Route
-              path="/photo-albums"
-              element={
-                <RequireAuth>
-                  <PhotoAlbumsPage />{" "}
-                </RequireAuth>
-              }
-            />
+              <Route
+                path="/photo-albums"
+                element={
+                  <RequireAuth>
+                    <PhotoAlbumsPage />{" "}
+                  </RequireAuth>
+                }
+              />
 
-            <Route
-              path="/photo-albums/:albumId"
-              element={
-                <RequireAuth>
-                  <PhotoAlbumPage />
-                </RequireAuth>
-              }
-            />
+              <Route
+                path="/photo-albums/:albumId"
+                element={
+                  <RequireAuth>
+                    <PhotoAlbumPage />
+                  </RequireAuth>
+                }
+              />
 
-            <Route path="/review/:albumId" element={<CustomerReviewPage />} />
+              <Route path="/review/:albumId" element={<CustomerReviewPage />} />
 
-            <Route
-              path="/review/feedback"
-              element={<CustomerReviewFeedbackPage />}
-            />
+              <Route
+                path="/review/feedback"
+                element={<CustomerReviewFeedbackPage />}
+              />
 
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </div>
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </div>
+        </SimpleReactLightbox>
       </AuthContextProvider>
     </BrowserRouter>
   );

@@ -8,7 +8,7 @@ const CustomerReviewPhotoCard = ({ onReviewPhoto, photo }) => {
       <Card.Img
         variant="top"
         src={photo?.photo_url}
-        style={{ height: "180px" }}
+        style={{ cursor: "pointer", height: "180px" }}
       />
       <Card.Body className="bg-dark">
         <div className="d-flex justify-content-between">

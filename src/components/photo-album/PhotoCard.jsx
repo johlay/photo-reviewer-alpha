@@ -6,7 +6,7 @@ const PhotoCard = ({ photo, refetchPhotos }) => {
   const { deletePhoto } = usePhotos();
 
   const onDeletePhoto = () => {
-    deletePhoto(photo ).then(() => {
+    deletePhoto(photo).then(() => {
       // refetch photos after photo deletion is successful
       refetchPhotos();
     });
@@ -17,7 +17,7 @@ const PhotoCard = ({ photo, refetchPhotos }) => {
       <Card.Img
         variant="top"
         src={photo?.photo_url}
-        style={{ height: "180px" }}
+        style={{ cursor: "pointer", height: "180px" }}
       />
       <Card.Body>
         <Card.Title>{photo?.name}</Card.Title>

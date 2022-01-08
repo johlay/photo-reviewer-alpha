@@ -8,9 +8,9 @@ const Feedback = () => {
         Thank you for reviewing the photo album!
       </h2>
 
-      <spa className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center">
         <FontAwesomeIcon icon={faHandshake} color="white" size="5x" />
-      </spa>
+      </div>
     </>
   );
 };
