@@ -23,10 +23,12 @@ const PhotoAlbumsCard = ({ album, refetch, user }) => {
         <Card.Body>
           <Card.Title>{album?.name}</Card.Title>
           <p className="mb-0">
-            Album created: {dayjs(album?.created_at?.seconds * 1000).fromNow()}
+            Created at: {dayjs(album?.created_at?.seconds * 1000).fromNow()}
           </p>
           <p className="mb-0">
-            <span className="fw-bold">Added by:</span> {user?.displayName}
+            {album?.reviewed === true
+              ? `Reviewed by: customer`
+              : `Added by: ${user?.displayName}`}
           </p>
           <div className="d-flex justify-content-between my-3">
             <span

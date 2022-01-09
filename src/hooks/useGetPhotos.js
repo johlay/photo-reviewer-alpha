@@ -8,7 +8,7 @@ const useGetPhotos = (albumId) => {
     const snapshot = await getDocs(
       query(
         collection(db, "photos"),
-        where("album_id", "==", uid),
+        where("albums", "array-contains", uid),
         orderBy("uploaded_at", "desc")
       )
     );

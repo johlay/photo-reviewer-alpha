@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import PhotoCard from "./PhotoCard";
 import { SRLWrapper } from "simple-react-lightbox";
 
-const PhotoGrid = ({ onSelectedPhoto, photos, refetchPhotos }) => {
+const PhotoGrid = ({ albumId, onSelectedPhoto, photos, refetchPhotos }) => {
   const emptyPhotoAlbumMessage = (
     <p className="text-light text-center h6">
       This photo album is currently empty
@@ -18,6 +18,7 @@ const PhotoGrid = ({ onSelectedPhoto, photos, refetchPhotos }) => {
           return (
             <Col key={photo?.uuid}>
               <PhotoCard
+                albumId={albumId}
                 onSelectedPhoto={onSelectedPhoto}
                 refetchPhotos={refetchPhotos}
                 photo={photo}

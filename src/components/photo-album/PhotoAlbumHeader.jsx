@@ -8,17 +8,20 @@ import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
 dayjs.extend(relativeTime);
 
 const PhotoAlbumHeader = ({ currentUser, photoAlbum }) => {
+  console.log({ photoAlbum });
   return (
     <Row>
       <Col>
         <h2 className="fw-bold text-light">{photoAlbum?.data?.name}</h2>
 
         <p className="text-light mb-0">
-          Album created:{" "}
+          Created at:{" "}
           {dayjs(photoAlbum?.data?.created_at?.seconds * 1000).fromNow()}
         </p>
         <p className="text-light mb-0">
-          <span className="fw-bold">Added by:</span> {currentUser?.displayName}
+          {photoAlbum?.data?.reviewed === true
+            ? `Reviewed by: customer`
+            : `Added by: ${currentUser?.displayName}`}
         </p>
       </Col>
       <Col className="d-flex justify-content-end">
