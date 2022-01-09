@@ -3,11 +3,11 @@ import Card from "react-bootstrap/Card";
 import PhotoSelector from "./PhotoSelector";
 import usePhotos from "../../hooks/usePhotos";
 
-const PhotoCard = ({ onSelectedPhoto, photo, refetchPhotos }) => {
+const PhotoCard = ({ albumId, onSelectedPhoto, photo, refetchPhotos }) => {
   const { deletePhoto, isMutating } = usePhotos();
 
   const onDeletePhoto = () => {
-    deletePhoto(photo).then(() => {
+    deletePhoto(photo, albumId).then(() => {
       // refetch photos after photo deletion is successful
       refetchPhotos();
     });

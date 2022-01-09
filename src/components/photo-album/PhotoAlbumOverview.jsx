@@ -67,6 +67,7 @@ const PhotoAlbumOverview = () => {
       <PhotoDropzone refetchPhotos={photos?.refetch} />
       <SelectionAndCreationSummary selectedPhotos={selectedPhotos} />
       <PhotoGrid
+        albumId={albumId}
         onSelectedPhoto={onSelectedPhoto}
         refetchPhotos={photos?.refetch}
         photos={photos}
