@@ -1,10 +1,10 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import PhotoSelector from "./PhotoSelector";
-import usePhotos from "../../hooks/usePhotos";
+import useDeletePhotos from "../../hooks/useDeletePhotos";
 
 const PhotoCard = ({ albumId, onSelectedPhoto, photo, refetchPhotos }) => {
-  const { deletePhoto, isMutating } = usePhotos();
+  const { deletePhoto, isMutating } = useDeletePhotos();
 
   const onDeletePhoto = () => {
     deletePhoto(photo, albumId).then(() => {

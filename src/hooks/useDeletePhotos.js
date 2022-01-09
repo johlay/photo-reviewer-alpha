@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 
-const usePhotos = () => {
+const useDeletePhotos = () => {
   const [isMutating, setIsMutating] = useState(false);
 
   const deletePhoto = async (photo, albumId) => {
@@ -44,4 +44,4 @@ const usePhotos = () => {
   return { deletePhoto, isMutating };
 };
 
-export default usePhotos;
+export default useDeletePhotos;

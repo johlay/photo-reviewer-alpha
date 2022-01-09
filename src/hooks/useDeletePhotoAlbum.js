@@ -1,11 +1,11 @@
 import { db } from "../firebase";
 import { doc, deleteDoc } from "firebase/firestore";
 import useGetPhotos from "./useGetPhotos";
-import usePhotos from "./usePhotos";
+import useDeletePhotos from "./useDeletePhotos";
 
 const useDeletePhotoAlbum = (albumId) => {
   const photos = useGetPhotos(albumId);
-  const { deletePhoto } = usePhotos();
+  const { deletePhoto } = useDeletePhotos();
 
   // delete the photo album
   const deletePhotoAlbum = async () => {
