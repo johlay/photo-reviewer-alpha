@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
-import useUploadPhoto from "../../hooks/useUploadPhoto";
+import useUploadPhotos from "../../hooks/useUploadPhotos";
 import UploadProgressBar from "./UploadProgressBar";
 
 const PhotoDropzone = ({ refetchPhotos }) => {
   const [files, setFiles] = useState();
-  const photo = useUploadPhoto();
+  const photos = useUploadPhotos();
 
   const { albumId } = useParams();
 
@@ -17,7 +17,7 @@ const PhotoDropzone = ({ refetchPhotos }) => {
     // store the file that was selected inside state variable: file
     setFiles(acceptedFiles);
 
-    photo.uploadPhoto(albumId, acceptedFiles, refetchPhotos, setFiles);
+    photos.uploadPhoto(albumId, acceptedFiles, refetchPhotos, setFiles);
   });
 
   const {
@@ -29,7 +29,7 @@ const PhotoDropzone = ({ refetchPhotos }) => {
   } = useDropzone({
     accept: "image/jpg, image/jpeg, image/png, image/webp",
     maxFiles: 5,
-    disabled: photo?.isMutating,
+    disabled: photos?.isMutating,
     onDrop,
   });
 
@@ -44,14 +44,14 @@ const PhotoDropzone = ({ refetchPhotos }) => {
     <>
       <div
         className={`py-3
-      ${!isDragActive && !photo?.isMutating && "bg-dark"}
+      ${!isDragActive && !photos?.isMutating && "bg-dark"}
       ${isDragAccept && "bg-success"}
       ${isDragReject && "bg-danger"}
-      ${photo?.isMutating && "bg-dark opacity-50"}
+      ${photos?.isMutating && "bg-dark opacity-50"}
       `}
         style={{
           border: "3px dashed white",
-          cursor: `${photo?.isMutating ? "" : "pointer"}`,
+          cursor: `${photos?.isMutating ? "" : "pointer"}`,
         }}
         {...getRootProps()}
         id="image-dropzone"
@@ -70,10 +70,10 @@ const PhotoDropzone = ({ refetchPhotos }) => {
         </div>
       </div>
 
-      {photo.uploadProgress !== null && (
+      {photos.uploadProgress !== null && (
         <UploadProgressBar
-          error={photo?.error}
-          progress={photo?.uploadProgress}
+          error={photos?.error}
+          progress={photos?.uploadProgress}
         />
       )}
     </>
