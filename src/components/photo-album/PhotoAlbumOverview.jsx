@@ -65,7 +65,10 @@ const PhotoAlbumOverview = () => {
 
       <hr className="bg-light my-5" />
       <PhotoDropzone refetchPhotos={photos?.refetch} />
-      <SelectionAndCreationSummary selectedPhotos={selectedPhotos} />
+      <SelectionAndCreationSummary
+        photoAlbum={photoAlbum}
+        selectedPhotos={selectedPhotos}
+      />
       <PhotoGrid
         albumId={albumId}
         onSelectedPhoto={onSelectedPhoto}
