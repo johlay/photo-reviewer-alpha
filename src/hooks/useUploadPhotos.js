@@ -12,7 +12,13 @@ const useUploadPhotos = () => {
 
   const { currentUser } = useAuthContext();
 
-  const uploadPhoto = (albumId, photos, refetchPhotos, setFiles) => {
+  const uploadPhoto = ({
+    albumId,
+    acceptedFiles: photos,
+    refetchPhotos,
+    setFiles,
+    dropzone,
+  }) => {
     // reset to default state
     setError(false);
     setUploadProgress(null);
@@ -75,8 +81,10 @@ const useUploadPhotos = () => {
           setIsMutating(false);
           setUploadProgress(null);
 
-          // if uploading process was successful, refetch photos
-          refetchPhotos();
+          // if uploading process was successful and "dropzone" variable is true, refetch photos
+          if (dropzone) {
+            refetchPhotos();
+          }
         }
       );
     });

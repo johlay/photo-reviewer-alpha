@@ -17,7 +17,13 @@ const PhotoDropzone = ({ refetchPhotos }) => {
     // store the file that was selected inside state variable: file
     setFiles(acceptedFiles);
 
-    photos.uploadPhoto(albumId, acceptedFiles, refetchPhotos, setFiles);
+    photos.uploadPhoto({
+      albumId,
+      acceptedFiles,
+      refetchPhotos,
+      setFiles,
+      dropzone: true,
+    });
   });
 
   const {
