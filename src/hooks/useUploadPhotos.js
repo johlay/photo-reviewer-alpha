@@ -5,7 +5,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import useAuthContext from "./useAuthContext";
 
-const useUploadPhoto = () => {
+const useUploadPhotos = () => {
   const [error, setError] = useState(false);
   const [isMutating, setIsMutating] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -85,4 +85,4 @@ const useUploadPhoto = () => {
   return { error, isMutating, uploadPhoto, uploadProgress };
 };
 
-export default useUploadPhoto;
+export default useUploadPhotos;
