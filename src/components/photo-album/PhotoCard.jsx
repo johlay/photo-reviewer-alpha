@@ -4,7 +4,7 @@ import PhotoSelector from "./PhotoSelector";
 import usePhotos from "../../hooks/usePhotos";
 
 const PhotoCard = ({ onSelectedPhoto, photo, refetchPhotos }) => {
-  const { deletePhoto } = usePhotos();
+  const { deletePhoto, isMutating } = usePhotos();
 
   const onDeletePhoto = () => {
     deletePhoto(photo).then(() => {
@@ -29,7 +29,7 @@ const PhotoCard = ({ onSelectedPhoto, photo, refetchPhotos }) => {
 
         <hr />
         <div className="d-grid">
-          <Button onClick={onDeletePhoto} variant="dark">
+          <Button disabled={isMutating} onClick={onDeletePhoto} variant="dark">
             Delete
           </Button>
         </div>
