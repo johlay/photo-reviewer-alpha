@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import usePhotoAlbum from "../../hooks/usePhotoAlbum";
+import useDeletePhotoAlbum from "../../hooks/useDeletePhotoAlbum";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -7,10 +7,10 @@ const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const photoAlbum = usePhotoAlbum();
+  const photoAlbum = useDeletePhotoAlbum(album?.id);
 
   const onDeletePhotoAlbum = () => {
-    photoAlbum.deletePhotoAlbum(album?.id).then(() => {
+    photoAlbum.deletePhotoAlbum().then(() => {
       // refetch data for photo albums after deletion
       refetch();
 

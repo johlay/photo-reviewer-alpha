@@ -8,7 +8,6 @@ import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
 dayjs.extend(relativeTime);
 
 const PhotoAlbumHeader = ({ currentUser, photoAlbum }) => {
-  console.log({ photoAlbum });
   return (
     <Row>
       <Col>

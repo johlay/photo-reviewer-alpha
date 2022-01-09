@@ -3,7 +3,6 @@ import {
   collection,
   doc,
   addDoc,
-  deleteDoc,
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
@@ -20,12 +19,6 @@ const usePhotoAlbum = () => {
     });
   };
 
-  // delete the photo album
-  const deletePhotoAlbum = async (albumId) => {
-    // delete the document for the photo album that is stored in firebase firestore
-    await deleteDoc(doc(db, "albums", albumId));
-  };
-
   // edit the title of the photo album
   const edit = async (newTitle, albumId) => {
     // update the title of the photo album
@@ -34,7 +27,7 @@ const usePhotoAlbum = () => {
     });
   };
 
-  return { create, deletePhotoAlbum, edit };
+  return { create, edit };
 };
 
 export default usePhotoAlbum;
