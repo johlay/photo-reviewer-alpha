@@ -4,6 +4,7 @@ import useAuthContext from "../../hooks/useAuthContext";
 import useGetPhotoAlbum from "../../hooks/useGetPhotoAlbum";
 import useGetPhotos from "../../hooks/useGetPhotos";
 import GoBackButton from "./GoBackButton";
+import NotFoundPage from "../../pages/NotFoundPage";
 import PhotoAlbumHeader from "./PhotoAlbumHeader";
 import PhotoDropzone from "./PhotoDropzone";
 import PhotoGrid from "./PhotoGrid";
@@ -28,6 +29,16 @@ const PhotoAlbumOverview = () => {
     return <RequireAuthMessage />;
   }
 
+  // returns page not found if data for the photo album could not be found
+  if (!photoAlbum?.data && photoAlbum.isFetched) {
+    return <NotFoundPage />;
+  }
+
+  // returns page not found if data for the photos could not be found
+  if (!photos?.data && photos.isFetched) {
+    return <NotFoundPage />;
+  }
+
   const onSelectedPhoto = (selected, photo) => {
     // check if user selected the photo, if true - add it to the array/state variable --> "selectedPhotos"
     if (selected === true) {
@@ -46,7 +57,8 @@ const PhotoAlbumOverview = () => {
     }
   };
 
-  return (
+  // render components only if data exists for: "photoAlbum" and "photos"
+  return photoAlbum?.data && photos?.data ? (
     <>
       <GoBackButton />
       <PhotoAlbumHeader currentUser={currentUser} photoAlbum={photoAlbum} />
@@ -60,7 +72,7 @@ const PhotoAlbumOverview = () => {
         photos={photos}
       />
     </>
-  );
+  ) : null;
 };
 
 export default PhotoAlbumOverview;
