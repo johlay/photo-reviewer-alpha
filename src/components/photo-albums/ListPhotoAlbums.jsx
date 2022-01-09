@@ -3,7 +3,7 @@ import useGetPhotoAlbums from "../../hooks/useGetPhotoAlbums";
 import CreatePhotoAlbum from "./CreatePhotoAlbum";
 import PhotoAlbumsGrid from "./PhotoAlbumsGrid";
 
-const ListMyPhotoAlbums = () => {
+const ListPhotoAlbums = () => {
   const { currentUser } = useAuthContext();
   const myPhotoAlbums = useGetPhotoAlbums(currentUser?.uid);
 
@@ -47,4 +47,4 @@ const ListMyPhotoAlbums = () => {
   );
 };
 
-export default ListMyPhotoAlbums;
+export default ListPhotoAlbums;
