@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { db } from "../firebase";
 import {
   addDoc,
@@ -9,9 +10,10 @@ import {
 } from "firebase/firestore";
 
 const useSelectPhotosAndCreatePhotoAlbum = () => {
+  const [newAlbum, setNewAlbum] = useState();
+
   // create a new photo album "copy" based on the selected photos
   const selectAndCreate = async (album, selectedPhotos) => {
-    console.log({ album, selectedPhotos });
     // create a new firebase firestore document for the new "empty" album
     const createdPhotoAlbumDocument = await addDoc(collection(db, "albums"), {
       name: `${album?.name}-Copy`,
@@ -27,9 +29,15 @@ const useSelectPhotosAndCreatePhotoAlbum = () => {
         albums: arrayUnion(createdPhotoAlbumDocument.id),
       });
     });
+
+    // save new album inside state variable: newAlbum
+    setNewAlbum({
+      id: createdPhotoAlbumDocument.id,
+      name: `${album?.name}-Copy`,
+    });
   };
 
-  return { selectAndCreate };
+  return { newAlbum, selectAndCreate };
 };
 
 export default useSelectPhotosAndCreatePhotoAlbum;

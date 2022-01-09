@@ -1,12 +1,17 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import SelectionAndCreationModal from "../modals/SelectionAndCreationModal";
 import useSelectPhotosAndCreatePhotoAlbum from "../../hooks/useSelectPhotosAndCreatePhotoAlbum";
 
 const SelectionAndCreationSummary = ({ photoAlbum, selectedPhotos }) => {
-  const { selectAndCreate } = useSelectPhotosAndCreatePhotoAlbum();
+  const [showModal, setShowModal] = useState(false);
+
+  const { newAlbum, selectAndCreate } = useSelectPhotosAndCreatePhotoAlbum();
 
   const handleButtonClick = () => {
     selectAndCreate(photoAlbum?.data, selectedPhotos).then(() => {
-      alert("Successfully created a new photo album based on selected photos")
+      // show modal that confirms that the new photo album has been created
+      setShowModal(true);
     });
   };
 
@@ -27,6 +32,12 @@ const SelectionAndCreationSummary = ({ photoAlbum, selectedPhotos }) => {
       <p className="text-light text-center mb-5">
         Selected photos: {selectedPhotos?.length}
       </p>
+
+      <SelectionAndCreationModal
+        album={newAlbum}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </>
   );
 };

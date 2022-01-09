@@ -11,14 +11,14 @@ const DeletePhotoAlbumModal = ({ album, refetch, showModal, setShowModal }) => {
 
   const onDeletePhotoAlbum = () => {
     photoAlbum.deletePhotoAlbum().then(() => {
-      // refetch data for photo albums after deletion
-      refetch();
-
       // check the pathname of location.
       if (location.pathname !== "/photo-albums") {
         // if user is for an example in route path: "/photo-albums/:albumId" --> re-directs user to page for showing all photo albums
         navigate("/photo-albums");
       } else {
+        // refetch data for photo albums after deletion
+        refetch();
+
         // close the modal if deletion was successful
         setShowModal(false);
       }
