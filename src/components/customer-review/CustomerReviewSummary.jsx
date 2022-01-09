@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsDown, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import useCreateCustomerReview from "../../hooks/useCreateCustomerReview";
 
-const CustomerReviewSummary = ({ reviewedPhotos }) => {
+const CustomerReviewSummary = ({ photoAlbum, reviewedPhotos }) => {
   const navigate = useNavigate();
+  const customerReview = useCreateCustomerReview();
 
   // check how many photos have been reviewed by customer
   const customerReviewedPhotos = reviewedPhotos?.filter(
@@ -28,10 +30,12 @@ const CustomerReviewSummary = ({ reviewedPhotos }) => {
   });
 
   const handleSubmitReview = () => {
-    alert("you have reviewed all photos!");
-
-    // re-directs user to route path: "/review/feedback"
-    navigate("/review/feedback");
+    customerReview
+      .createCustomerReview(photoAlbum, reviewedPhotosKeep)
+      .then(() => {
+        // re-directs user to route path: "/review/feedback"
+        navigate("/review/feedback");
+      });
   };
 
   return (

@@ -47,7 +47,10 @@ const CustomerReviewPhotoAlbum = ({ photos, photoAlbum }) => {
       <h3 className="text-center text-light py-3 fw-bold h2">
         {photoAlbum?.data?.name}
       </h3>
-      <CustomerReviewSummary reviewedPhotos={reviewedPhotos} />
+      <CustomerReviewSummary
+        photoAlbum={photoAlbum?.data}
+        reviewedPhotos={reviewedPhotos}
+      />
       <CustomerReviewPhotoGrid
         onReviewPhoto={onReviewPhoto}
         photos={reviewedPhotos}

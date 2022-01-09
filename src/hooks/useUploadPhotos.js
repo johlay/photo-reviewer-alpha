@@ -73,7 +73,7 @@ const useUploadPhotos = () => {
             ext,
             photo_url: url,
             uploaded_at: serverTimestamp(),
-            album_id: albumId,
+            albums: [albumId],
             uuid,
           });
 

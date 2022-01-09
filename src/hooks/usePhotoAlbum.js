@@ -16,7 +16,7 @@ const usePhotoAlbum = () => {
       name: title,
       owner: userUid,
       created_at: serverTimestamp(),
-      reviews: null,
+      reviewed: false,
     });
   };
 
