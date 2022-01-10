@@ -7,7 +7,7 @@ import PhotoAlbumHeaderOptions from "./PhotoAlbumHeaderOptions";
 // implement additional dayjs form
 dayjs.extend(relativeTime);
 
-const PhotoAlbumHeader = ({ currentUser, photoAlbum }) => {
+const PhotoAlbumHeader = ({ currentUser, photos, photoAlbum }) => {
   return (
     <Row>
       <Col>
@@ -26,6 +26,7 @@ const PhotoAlbumHeader = ({ currentUser, photoAlbum }) => {
       <Col className="d-flex justify-content-end">
         <PhotoAlbumHeaderOptions
           album={photoAlbum?.data}
+          photos={photos}
           refetch={photoAlbum?.refetch}
         />
       </Col>

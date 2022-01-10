@@ -7,7 +7,7 @@ import CreateReviewLinkModal from "../modals/CreateReviewLinkModal";
 import DeletePhotoAlbumModal from "../modals/DeletePhotoAlbumModal";
 import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
 
-const PhotoAlbumHeaderOptions = ({ album, refetch }) => {
+const PhotoAlbumHeaderOptions = ({ album, photos, refetch }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showCreateReviewLinkModal, setShowCreateReviewLinkModal] =
@@ -32,6 +32,7 @@ const PhotoAlbumHeaderOptions = ({ album, refetch }) => {
 
         <Button
           onClick={() => setShowCreateReviewLinkModal(true)}
+          disabled={photos?.length === 0}
           variant="dark"
         >
           Create review link

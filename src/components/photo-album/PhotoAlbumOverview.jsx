@@ -61,7 +61,11 @@ const PhotoAlbumOverview = () => {
   return photoAlbum?.data && photos?.data ? (
     <>
       <GoBackButton />
-      <PhotoAlbumHeader currentUser={currentUser} photoAlbum={photoAlbum} />
+      <PhotoAlbumHeader
+        currentUser={currentUser}
+        photos={photos?.data}
+        photoAlbum={photoAlbum}
+      />
 
       <hr className="bg-light my-5" />
       <PhotoDropzone refetchPhotos={photos?.refetch} />
