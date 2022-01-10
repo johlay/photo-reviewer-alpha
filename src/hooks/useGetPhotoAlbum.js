@@ -17,7 +17,7 @@ const useGetPhotoAlbum = (albumId) => {
     }
   };
 
-  const getPhotoAlbumQuery = useQuery(["get-photo-album", albumId], () =>
+  const getPhotoAlbumQuery = useQuery([`get-photo-album-${albumId}`], () =>
     getPhotoAlbum(albumId)
   );
 

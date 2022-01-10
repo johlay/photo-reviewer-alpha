@@ -23,7 +23,7 @@ const useGetPhotos = (albumId) => {
     return response;
   };
 
-  const photosQuery = useQuery(["get-photos", albumId], () =>
+  const photosQuery = useQuery([`get-photos-${albumId}`], () =>
     getPhotos(albumId)
   );
 
