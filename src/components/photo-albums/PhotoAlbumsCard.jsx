@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import EditPhotoAlbumTitleModal from "../modals/EditPhotoAlbumTitleModal";
+import useGetPhotos from "../../hooks/useGetPhotos";
 
 // implement additional dayjs form
 dayjs.extend(relativeTime);
@@ -15,10 +16,24 @@ const PhotoAlbumsCard = ({ album, refetch, user }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const photos = useGetPhotos(album?.id);
+
+  // show an empty photo album thumbnail if there are no photos uploaded in the photo album, otherwise show the latest uploaded photo as thumbnail
+  const photoAlbumThumbnail =
+    photos?.data?.length === 0 ? (
+      <div className="bg-dark rounded" style={{ height: "180px" }}></div>
+    ) : (
+      <Card.Img
+        variant="top"
+        src={photos?.data?.[0]?.photo_url}
+        style={{ cursor: "pointer", height: "180px" }}
+      />
+    );
+
   return (
     <>
       <Card className="my-4">
-        <div className="bg-dark rounded" style={{ height: "180px" }}></div>
+        {photoAlbumThumbnail}
 
         <Card.Body>
           <Card.Title>{album?.name}</Card.Title>
