@@ -71,6 +71,7 @@ const PhotoAlbumOverview = () => {
       />
       <PhotoGrid
         albumId={albumId}
+        isAlbumReviewed={photoAlbum?.data?.reviewed}
         onSelectedPhoto={onSelectedPhoto}
         refetchPhotos={photos?.refetch}
         photos={photos}
