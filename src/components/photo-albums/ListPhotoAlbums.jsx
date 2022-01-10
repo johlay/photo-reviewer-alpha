@@ -21,6 +21,13 @@ const ListPhotoAlbums = () => {
         refetch={myPhotoAlbums.refetch}
         userUid={currentUser?.uid}
       />
+
+      {userPhotoAlbums?.length === 0 && (
+        <p className="text-light text-center h6 my-3">
+          There are currently no photo albums added by you
+        </p>
+      )}
+
       <PhotoAlbumsGrid
         data={userPhotoAlbums}
         refetch={myPhotoAlbums.refetch}
