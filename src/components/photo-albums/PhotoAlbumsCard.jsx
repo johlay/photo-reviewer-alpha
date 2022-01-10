@@ -26,7 +26,7 @@ const PhotoAlbumsCard = ({ album, refetch, user }) => {
       <Card.Img
         variant="top"
         src={photos?.data?.[0]?.photo_url}
-        style={{ cursor: "pointer", height: "180px" }}
+        style={{ height: "180px" }}
       />
     );
 
