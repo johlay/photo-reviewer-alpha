@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const SelectionAndCreationModal = ({ album, showModal, setShowModal }) => {
+const SelectionAndCreationModal = ({
+  album,
+  resetSelectedPhotos,
+  showModal,
+  setShowModal,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -25,7 +30,12 @@ const SelectionAndCreationModal = ({ album, showModal, setShowModal }) => {
         </Button>
         <Button
           variant="dark"
-          onClick={() => navigate(`/photo-albums/${album?.id}`)}
+          onClick={() => {
+            // reset list of selected photos --> empty array
+            resetSelectedPhotos();
+
+            navigate(`/photo-albums/${album?.id}`);
+          }}
         >
           Go to new photo album
         </Button>

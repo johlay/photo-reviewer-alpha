@@ -3,7 +3,11 @@ import Button from "react-bootstrap/Button";
 import SelectionAndCreationModal from "../modals/SelectionAndCreationModal";
 import useSelectPhotosAndCreatePhotoAlbum from "../../hooks/useSelectPhotosAndCreatePhotoAlbum";
 
-const SelectionAndCreationSummary = ({ photoAlbum, selectedPhotos }) => {
+const SelectionAndCreationSummary = ({
+  photoAlbum,
+  resetSelectedPhotos,
+  selectedPhotos,
+}) => {
   const [showModal, setShowModal] = useState(false);
 
   const { newAlbum, selectAndCreate } = useSelectPhotosAndCreatePhotoAlbum();
@@ -35,6 +39,7 @@ const SelectionAndCreationSummary = ({ photoAlbum, selectedPhotos }) => {
 
       <SelectionAndCreationModal
         album={newAlbum}
+        resetSelectedPhotos={resetSelectedPhotos}
         showModal={showModal}
         setShowModal={setShowModal}
       />
