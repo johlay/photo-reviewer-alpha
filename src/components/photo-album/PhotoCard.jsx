@@ -8,6 +8,9 @@ const PhotoCard = ({ albumId, onSelectedPhoto, photo, refetchPhotos }) => {
 
   const onDeletePhoto = () => {
     deletePhoto(photo, albumId).then(() => {
+      // remove the photo from selectedPhotos array as well (if already selected)
+      onSelectedPhoto(false, photo);
+
       // refetch photos after photo deletion is successful
       refetchPhotos();
     });
