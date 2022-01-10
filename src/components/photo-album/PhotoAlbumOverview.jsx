@@ -57,6 +57,9 @@ const PhotoAlbumOverview = () => {
     }
   };
 
+  // reset array/list that contains selected photos
+  const resetSelectedPhotos = () => setSelectedPhotos([]);
+
   // render components only if data exists for: "photoAlbum" and "photos"
   return photoAlbum?.data && photos?.data ? (
     <>
@@ -71,6 +74,7 @@ const PhotoAlbumOverview = () => {
       <PhotoDropzone refetchPhotos={photos?.refetch} />
       <SelectionAndCreationSummary
         photoAlbum={photoAlbum}
+        resetSelectedPhotos={resetSelectedPhotos}
         selectedPhotos={selectedPhotos}
       />
       <PhotoGrid
